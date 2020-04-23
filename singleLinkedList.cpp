@@ -69,6 +69,22 @@ int insertAtHead(int data){
 		return 0;
 }
 
+int deleteNode(int nodeNumber){
+	node *iterator = new node();
+
+	iterator = head;
+	int i = 0;
+	while( iterator -> next != NULL){
+		if( (nodeNumber - 1) == i){
+			break;
+		}
+		i++;
+		iterator  = iterator -> next; 
+	}
+	iterator -> next = iterator -> next -> next;
+	return 1;
+}
+
 int printList(){
 	node *iterator = new node();
 	iterator = head;
@@ -89,7 +105,7 @@ int main(){
 
 	do{
 
-		cout << "1.Insert\n2.Print\n3.Insert after\n4.Insert at head\nEnter operation : "; cin >> choice;
+		cout << "1.Insert\n2.Print\n3.Insert after\n4.Insert at head\n5.Delete\nEnter operation : "; cin >> choice;
 		switch(choice){
 		
 		case 1: cout << "Enter Data : "; cin >> data;
@@ -106,11 +122,16 @@ int main(){
 		case 4:	cout << "Enter Data : "; cin >> data;
 				insertAtHead(data);
 		break;
+
+		case 5: cout << "Enter node number : "; cin >> data;
+				deleteNode(data);
+		break;
+
 		default: cout << "Invalid" << endl;
 		break;
 		}
 
-	}while(choice <= 4);
+	}while(choice <= 5);
 	
 	return 0;
 }
