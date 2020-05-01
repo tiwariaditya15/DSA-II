@@ -26,7 +26,7 @@ bool Queue::isEmpty(){
 
 	return false;
 }
-
+//enque function still has flaws look into it
 int Queue::enQueue(int data){
 	if(isFull()){
 		return -1;
