@@ -6,7 +6,7 @@ struct node{
 };
 
 node *head = NULL;
-
+int countLength();
 int insert(int data){
 
 	if( head == NULL){
@@ -70,33 +70,63 @@ int insertAtHead(int data){
 }
 
 int deleteNode(int nodeNumber){
-	node *iterator = new node();
+	
+	if(nodeNumber <= countLength()){
+		node *iterator = new node();
 
 	iterator = head;
 	int i = 0;
 	while( iterator -> next != NULL){
+		i++;
 		if( (nodeNumber - 1) == i){
 			break;
 		}
-		i++;
 		iterator  = iterator -> next; 
 	}
 	iterator -> next = iterator -> next -> next;
 	return 1;
+
+	} else{
+		cout << endl << "Node Number " << nodeNumber << " doesn't exist.";
+		return -1;
+	}
+
+	
 }
 
 int printList(){
-	node *iterator = new node();
-	iterator = head;
-	cout << "Elements : ";
-	while(iterator -> next != NULL){
-		cout << iterator -> data << " ";
-		iterator = iterator -> next;
+	if(head == NULL){
+		cout << endl << "List is empty.";
+		return 0;
+	}else{
+		node *iterator = new node();
+		iterator = head;
+		cout << "Elements : ";
+		while(iterator -> next != NULL){
+			cout << iterator -> data << " ";
+			iterator = iterator -> next;
+		}
+
+		cout << iterator -> data << endl;
+
+		return 1;
 	}
+}
 
-	cout << iterator -> data << endl;
+int countLength(){
+	if(head == NULL){
+		cout << endl << "List is empty.";
+		return 0;
+	}else{
+		int length = 0;
+		node *current = head;
+		while(current -> next != NULL){
+			length++;
+			current = current -> next;
+		}
 
-	return 1;
+		return ++length;
+	}
 }
 
 int main(){
@@ -105,7 +135,7 @@ int main(){
 
 	do{
 
-		cout << "1.Insert\n2.Print\n3.Insert after\n4.Insert at head\n5.Delete\nEnter operation : "; cin >> choice;
+		cout << endl << "1.Insert\n2.Print\n3.Insert after\n4.Insert at head\n5.Delete\n6.Count\nEnter operation : "; cin >> choice;
 		switch(choice){
 		
 		case 1: cout << "Enter Data : "; cin >> data;
@@ -127,11 +157,14 @@ int main(){
 				deleteNode(data);
 		break;
 
+		case 6: cout << endl << "Length of List:" << countLength();
+		break;
+
 		default: cout << "Invalid" << endl;
 		break;
 		}
 
-	}while(choice <= 5);
+	}while(choice <= 6);
 	
 	return 0;
 }
